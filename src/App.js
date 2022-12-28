@@ -3,8 +3,12 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import SignUp from './components/SignUp';
 import Login from './components/Login';
+import { GlobalContext } from './context/Context';
+import Dashboard from './components/Dashboard';
 
 function App() {
+
+  let { state, dispatch } = useContext(GlobalContext);
 
 
   let baseUrl = "";
@@ -22,11 +26,21 @@ function App() {
 
     <>
 
+  {    (state.isLogin === false) ?
       <Routes>
         <Route path='/' exact element={<SignUp baseUrl={baseUrl}/>}/>
         <Route path='/login' element={<Login baseUrl={baseUrl}/>}/>
+       <Route path="*" element={<Navigate to="/" replace={true} />} />
       </Routes>
 
+      :
+
+      <Routes>
+        <Route path='/' element={<Dashboard/>}/>
+        <Route path="*" element={<Navigate to="/" replace={true} />} />
+      </Routes>
+
+}
     </>
   );
 }

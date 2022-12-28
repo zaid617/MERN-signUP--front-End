@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import axios from 'axios';
 import {Link} from "react-router-dom"
+import { GlobalContext } from '../context/Context';
 
     export default function Login(props) {
 
+      let { state, dispatch } = useContext(GlobalContext);
       let [email , setEmail] = useState("");
       let [password , setPassword] = useState("");
       let [err, setErr] = useState("")
@@ -20,6 +22,9 @@ import {Link} from "react-router-dom"
           })
           console.log("login successful");
           setMess(response?.data?.message)
+          dispatch({
+            type: 'USER_LOGIN'
+          })
 
       }      catch (e) {
         setErr(e.response?.data?.message)
