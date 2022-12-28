@@ -1,6 +1,6 @@
 import './App.css';
-import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import SignUp from './components/SignUp';
 import Login from './components/Login';
 import { GlobalContext } from './context/Context';
@@ -36,7 +36,7 @@ function App() {
       :
 
       <Routes>
-        <Route path='/' element={<Dashboard/>}/>
+        <Route path='/' element={<Dashboard baseUrl={baseUrl}/>}/>
         <Route path="*" element={<Navigate to="/" replace={true} />} />
       </Routes>
 
