@@ -26,19 +26,17 @@ function App() {
 
     <>
 
-  {    (state.isLogin === false) ?
-      <Routes>
+  {    (!state.isLogin) ?
+(      <Routes>
         <Route path='/' exact element={<SignUp baseUrl={baseUrl}/>}/>
         <Route path='/login' element={<Login baseUrl={baseUrl}/>}/>
        <Route path="*" element={<Navigate to="/" replace={true} />} />
-      </Routes>
-
+      </Routes>)
       :
-
-      <Routes>
-        <Route path='/' element={<Dashboard baseUrl={baseUrl}/>}/>
+(      <Routes> 
+        <Route path='/' exact element={<Dashboard baseUrl={baseUrl}/>}/>
         <Route path="*" element={<Navigate to="/" replace={true} />} />
-      </Routes>
+      </Routes>)
 
 }
     </>
