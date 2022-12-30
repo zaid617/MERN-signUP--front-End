@@ -28,19 +28,18 @@ function App() {
         let response = await axios.get(`${state.baseUrl}/products`, {
           withCredentials: true
         })
-
-        console.log("response: ", response);
-
+        console.log("response: ", response.data);
         dispatch({
           type: 'USER_LOGIN'
         })
+
       } catch (error) {
 
         console.log("axios error: ", error);
-
         dispatch({
           type: 'USER_LOGOUT'
         })
+        
       }
 
 
@@ -57,16 +56,16 @@ function App() {
     <>
 
   {    (state.isLogin === false) ?
-(      <Routes>
+    <Routes>
         <Route path='/' exact element={<SignUp baseUrl={baseUrl}/>}/>
         <Route path='/login' element={<Login baseUrl={baseUrl}/>}/>
        <Route path="*" element={<Navigate to="/" replace={true} />} />
-      </Routes>)
+      </Routes>
       :
-(      <Routes> 
+     <Routes> 
         <Route path='/' exact element={<Dashboard baseUrl={baseUrl}/>}/>
         <Route path="*" element={<Navigate to="/" replace={true} />} />
-      </Routes>)
+      </Routes>
 
 }
     </>
