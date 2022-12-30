@@ -1,10 +1,11 @@
 import './App.css';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import SignUp from './components/SignUp';
 import Login from './components/Login';
 import { GlobalContext } from './context/Context';
 import Dashboard from './components/Dashboard';
+import axios from 'axios';
 
 function App() {
 
@@ -19,6 +20,35 @@ function App() {
   else{
     baseUrl = "https://mern-signup.cyclic.app"
   }
+
+  useEffect(() => {
+    
+    const getProfile = async () => {
+      try {
+        let response = await axios.get(`${state.baseUrl}/products`, {
+          withCredentials: true
+        })
+
+        console.log("response: ", response);
+
+        dispatch({
+          type: 'USER_LOGIN'
+        })
+      } catch (error) {
+
+        console.log("axios error: ", error);
+
+        dispatch({
+          type: 'USER_LOGOUT'
+        })
+      }
+
+
+
+    }
+    getProfile();
+
+  }, [dispatch, state.baseUrl])
   
 
 
