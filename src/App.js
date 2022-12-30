@@ -22,32 +22,26 @@ function App() {
   }
 
   useEffect(() => {
-    
     const getProfile = async () => {
       try {
-        let response = await axios.get(`${state.baseUrl}/products`, {
-          withCredentials: true
-        })
-        console.log("response: ", response.data);
-        dispatch({
-          type: 'USER_LOGIN'
-        })
+        let response = await axios.get(`${baseUrl}/products`, {
+          withCredentials: true,
+        });
 
+        dispatch({
+          type: "USER_LOGIN",
+        });
       } catch (error) {
-
-        console.log("axios error: ", error);
         dispatch({
-          type: 'USER_LOGOUT'
-        })
-        
+          type: "USER_LOGOUT",
+        });
+        console.log("axios error: ", error);
+
       }
+    };
 
-
-
-    }
     getProfile();
-
-  }, [dispatch, state.baseUrl])
+  }, [dispatch,baseUrl]);
   
 
 
