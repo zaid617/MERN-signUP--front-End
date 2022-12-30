@@ -56,7 +56,7 @@ function App() {
 
     <>
 
-  {    (!state.isLogin) ?
+  {    (state.isLogin === false) ?
 (      <Routes>
         <Route path='/' exact element={<SignUp baseUrl={baseUrl}/>}/>
         <Route path='/login' element={<Login baseUrl={baseUrl}/>}/>
