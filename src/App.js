@@ -22,26 +22,42 @@ function App() {
   }
 
   useEffect(() => {
+
     const getProfile = async () => {
       try {
-        let response = await axios.get(`${baseUrl}/products`, {
+
+        const config = {
+          url: `${baseUrl}/products`,
+          data: {},
+          method: "GET",
+          headers: {
+            'Cache-Control': 'no-cache',
+            'Pragma': 'no-cache',
+            'Expires': '0',
+          },
           withCredentials: true,
-        });
+        }
+
+        let response = await axios(config)
+        console.log("status: ", response.status);
 
         dispatch({
-          type: "USER_LOGIN",
-        });
+          type: 'USER_LOGIN'
+        })
       } catch (error) {
-        dispatch({
-          type: "USER_LOGOUT",
-        });
+
         console.log("axios error: ", error);
 
+        dispatch({
+          type: 'USER_LOGOUT'
+        })
       }
-    };
 
+
+
+    }
     getProfile();
-  }, [dispatch,baseUrl]);
+  }, [dispatch, baseUrl]);
   
 
 
@@ -62,6 +78,15 @@ function App() {
       </Routes>
 
 }
+
+{(state.isLogin === null) ?
+
+<div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: '100vh' }}>
+  <img width={300} src="https://e7.pngegg.com/pngimages/321/641/png-clipart-load-the-map-loading-load.png" alt="" />
+</div>
+
+: null}
+
     </>
   );
 }

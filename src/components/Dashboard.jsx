@@ -8,10 +8,10 @@ export default function Dashboard(props) {
     const logOut = async ()=>{
 
       try {
-        let response = await axios.post(`${props.baseUrl}/logout`, {
-
-        }, {
-            withCredentials: true
+        let response = await axios.post(`${state.baseUrl}/logout`,
+        {},
+        {
+          withCredentials: true
         })
         console.log("logout successful");
         dispatch({
