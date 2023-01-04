@@ -8,8 +8,17 @@
       name="description"
       content="Web site created using create-react-app"
     />
-    <title>React App</title>
+    <link rel="manifest" href="./manifest.json">
+    <script>
+
+      if (typeof navigator.serviceWorker !== 'undefined') {
+        navigator.serviceWorker.register('pwabuilder-sw.js')
+      }
+    </script>
+    <link rel="icon" type="image/x-icon" href="./windows11/LargeTile.scale-200.png">
+    <title>Post App</title>
   </head>
+
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>

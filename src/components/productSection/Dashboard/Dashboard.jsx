@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import axios from 'axios';
+import axios from 'axios'
 import { GlobalContext } from '../../../context/Context';
 
 export default function Dashboard(props) {

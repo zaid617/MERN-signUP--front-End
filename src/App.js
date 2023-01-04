@@ -21,6 +21,8 @@ function App() {
     baseUrl = "https://mern-signup.cyclic.app"
   }
 
+
+
   useEffect(() => {
 
     const getProfile = async () => {
@@ -35,8 +37,6 @@ function App() {
               'Expires': '0',
             }
           });
-
-        console.log("response: ", response);
 
         dispatch({
           type: 'USER_LOGIN',
