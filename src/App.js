@@ -46,7 +46,7 @@ function App() {
     };
 
     getProfile();
-  }, [baseUrl, dispatch]);
+  }, [baseUrl, dispatch])
 
   // axios intercaption js se hr request me withCredentials true ho jae ga sb me alg alg nahi lgana pare ga
 
