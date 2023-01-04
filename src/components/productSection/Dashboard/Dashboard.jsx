@@ -1,14 +1,20 @@
 import React, { useContext } from 'react'
 import axios from 'axios';
-import { GlobalContext } from '../context/Context';
+import { GlobalContext } from '../../../context/Context';
 
 export default function Dashboard(props) {
+
+
     
   let { state, dispatch } = useContext(GlobalContext);
+
+
+
+
     const logOut = async ()=>{
 
       try {
-        let response = await axios.post(`${state.baseUrl}/logout`,
+        let response = await axios.post(`${props.baseUrl}/logout`,
         {},
         {
           withCredentials: true
