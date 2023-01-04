@@ -24,69 +24,60 @@ function App() {
 
 
   useEffect(() => {
-
     const getProfile = async () => {
       try {
         let response = await axios.get(
           `${baseUrl}/profile`,
           {
             withCredentials: true,
-            headers: {
-              'Cache-Control': 'no-cache',
-              'Pragma': 'no-cache',
-              'Expires': '0',
-            }
-          });
+          }
+        );
 
         dispatch({
-          type: 'USER_LOGIN',
-          payload: response.data
-        })
+          type: "USER_LOGIN",
+          payload: response.data,
+        });
       } catch (error) {
-
-        console.log("axios error: ", error);
-
         dispatch({
-          type: 'USER_LOGOUT'
-        })
+          type: "USER_LOGOUT",
+        });
+        console.log("axios error: ", error);
       }
+    };
 
-
-
-    }
     getProfile();
+  }, [baseUrl, dispatch]);
 
-  }, [baseUrl, dispatch])
-
+  // axios intercaption js se hr request me withCredentials true ho jae ga sb me alg alg nahi lgana pare ga
 
   useEffect(() => {
-
-    // Add a request interceptor
-    axios.interceptors.request.use(function (config) {
-      // Do something before request is sent
-      config.withCredentials = true;
-      return config;
-    }, function (error) {
-      // Do something with request error
-      return Promise.reject(error);
-    });
-
-    // Add a response interceptor
-    axios.interceptors.response.use(function (response) {
-      // Any status code that lie within the range of 2xx cause this function to trigger
-      // Do something with response data
-      return response;
-    }, function (error) {
-      // Any status codes that falls outside the range of 2xx cause this function to trigger
-      // Do something with response error
-      if (error.response.status === 401) {
-        dispatch({
-          type: 'USER_LOGOUT'
-        })
+    // request me interceptors add kya he
+    // jo ke request send hone se pehle add ho ga
+    axios.interceptors.request.use(
+      (config) => {
+        config.withCredentials = true;
+        return config;
+      },
+      (error) => {
+        return Promise.reject(error);
       }
-      return Promise.reject(error);
-    });
-  }, [dispatch])
+    );
+    // respone me interceptors add kya he
+    // jo ke response aane ke bad add ho ga
+    axios.interceptors.response.use(
+      (response) => {
+        return response;
+      },
+      (error) => {
+        if (error.response.status === 401) {
+          dispatch({
+            type: "USER_LOGOUT",
+          });
+        }
+        return Promise.reject(error);
+      }
+    );
+  }, [dispatch]);
 
 
   return (
@@ -109,8 +100,8 @@ function App() {
 
 {(state.isLogin === null) ?
 
-<div style={{ position: "absolute" , top:"0",overflowY:'hidden', left: "0" }}>
-  <img style={{width:"98.5vw", height:"100vh" , objectFit:"cover",}} src="https://f.hubspotusercontent40.net/hubfs/5621549/check-loader-gif.gif" alt="" />
+<div style={{ position: "absolute" , top:"0", left: "0" }}>
+  <h1 style={{display:"flex",alignItems:"center",background: "linear-gradient(#141e30, #243b55)", justifyContent:"center", width:"98vw", height:"95vh", color:'white'}}>LOADING....</h1>
 </div>
 
 : null}
