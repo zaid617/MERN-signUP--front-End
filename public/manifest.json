@@ -9,7 +9,9 @@
   "short_name": "mern-form001.netlify",
   "start_url": "/",
   "theme_color": "#000000",
-  "categories": [],
+  "categories": [
+    "social"
+  ],
   "screenshots": [],
   "icons": [
     {
